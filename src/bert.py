@@ -88,5 +88,5 @@ preds = model.predict(tokenized_sentences['input_ids'], attention_mask=tokenized
 pred_labels = np.argmax(preds.logits, axis=1)
 
 # Save predictions to a file
-file = Config.LSTM_FILE
+file = Config.BERT_FILE
 np.savetxt(file, pred_labels, header="dev accuracy: " + str(accuracy_score(y_dev, pred_labels)))
