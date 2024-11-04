@@ -8,3 +8,14 @@ Includes:
   Good Secretaries, Bad Truck Drivers? Occupational Gender Stereotypes in Sentiment Analysis
   Jayadev Bhaskaran and Isha Bhallamudi
   ```
+
+
+## Repository Structure
+- *runs_original/* - Directory that contains original training run outputs (model predictions on evaluation corpus, model checkpoints).
+- *runs/* - Directory that contains reprodeuced training run outputs (model predictions on evaluation corpus, model checkpoints).
+- *src/* - Directory for all source code (e.g. models, preprocessing scripts, analysis scripts).
+
+## Data 
+Can be found here: https://github.com/jayadevbhaskaran/gendered-sentiment
+- *data/gender_corpus.tsv* - New corpus to evaluate occupational gender stereotypes in sentiment analysis models. 
+- *data/* - Directory that contains all data (SST-2, evaluation corpus).
