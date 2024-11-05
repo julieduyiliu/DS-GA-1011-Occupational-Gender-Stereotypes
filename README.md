@@ -12,10 +12,8 @@ Includes:
 
 ## Repository Structure
 - *runs_original/* - Directory that contains original training run outputs (model predictions on evaluation corpus, model checkpoints).
-- *runs/* - Directory that contains reprodeuced training run outputs (model predictions on evaluation corpus, model checkpoints).
+- *runs_Kina/* - Directory that contains reprodeuced training run outputs (model predictions on evaluation corpus, model checkpoints).
 - *src/* - Directory for all source code (e.g. models, preprocessing scripts, analysis scripts).
-
-## Data 
-Can be found here: https://github.com/jayadevbhaskaran/gendered-sentiment
+- *src_new/* - Directory for all updated source code to reproduce.
 - *data/gender_corpus.tsv* - New corpus to evaluate occupational gender stereotypes in sentiment analysis models. 
-- *data/* - Directory that contains all data (SST-2, evaluation corpus).
+- *data/* - Directory that contains all data (SST-2, evaluation corpus). (this folder does not indude all datasets needed)
