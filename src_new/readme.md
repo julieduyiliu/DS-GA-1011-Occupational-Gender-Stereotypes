@@ -1,4 +1,4 @@
-Here's a concise summary of the changes I made to the original source code in folder src/
+Here's a concise summary of the changes I made to the original source code in folder _src/_
 
 1. **Added **BERT Fine-tuning****: introduced fine-tuning for a pretrained BERT model (BERT-Base, uncased) on the SST-2 dataset, including data loading, tokenization, and setting up a Trainer with parameters like batch size, learning rate, epochs, and logging options. Predictions were saved as positive class probabilities compatible with analysis.py.
 2. **Model Format Recommendation**: Updated the model-saving format to .keras over .h5 in response to TensorFlow/Keras recommendations for better compatibility and future-proofing.
