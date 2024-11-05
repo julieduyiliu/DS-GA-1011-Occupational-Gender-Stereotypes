@@ -9,8 +9,8 @@ The evaluation methodology follows **Kiritchenko and Mohammad (2018)**, using a 
 
 ### Model 1: Bag-of-Words + Logistic Regression (BoW + LogReg)
 - **Replication Result**: Successfully replicated with results matching the original study.
-- **Dev Accuracy**: 0.827
-- **Gender Difference (F - M)**: 0.035**
+- **Dev Accuracy**: 0.827 (Same as original)
+- **Gender Difference (F - M)**: 0.035** (Same as original)
 
 ### Model 2: BiLSTM
 - **Replication Result**: Results deviated slightly from the original study.
@@ -24,10 +24,10 @@ The evaluation methodology follows **Kiritchenko and Mohammad (2018)**, using a 
   These deviations, while minor, do not alter the overall trend observed in the study.
 
 ### Model 3: BERT
-- **Replication Approach**: Since original BERT fine-tuning code was unavailable, we implemented a custom fine-tuning approach on the SST-2 dataset.
+- **Replication Approach**: Since original BERT fine-tuning code was not published by the author, we implemented a similar approach: use a pretrained (uncased) [BERT-Base model](https://bit.ly/2S8w6Jt) and finetune it on the SST-2 dataset.
 - **Results**:
-  - **Dev Accuracy**: 0.926 (similar to the original 0.930)
-  - **Gender Difference (F - M)**: -0.014 (not statistically significant)
+  - **Dev Accuracy**: 0.926 (original: 0.930)
+  - **Gender Difference (F - M)**: -0.014 (not statistically significant, original: -0.040**)
 - **Explanation for Lack of Significance**:
   - **Model Architecture Sensitivity**: BERT’s architecture and pretraining objective may not be as sensitive to subtle gender-based sentiment variations.
   - **Variability in Pretrained Weights**: Fine-tuning a different pretrained BERT model could yield different sensitivities to linguistic nuances.
