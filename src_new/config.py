@@ -11,17 +11,23 @@ class Config:
     LOGREG_FILE = Path(join(RUNS_DIR, "logreg.txt"))
     LSTM_FILE = Path(join(RUNS_DIR, "lstm.txt"))
     BERT_FILE = Path(join(Path(join(RUNS_DIR, "gender")), "test_results.tsv"))
+    GPT_FILE = Path(join(RUNS_DIR, "gpt.txt"))
     RESULTS_FILE = Path(join(RUNS_DIR, "results.txt"))
+    
 
     TSV_TRAIN = Path(join(DATA_DIR, "train.tsv"))
     TSV_DEV = Path(join(DATA_DIR, "dev.tsv"))
     TSV_TEST_GENDER = Path(join(DATA_DIR, "gender.tsv"))
     PLOT_DATA_FILE = Path(join(DATA_DIR, "plot_data.csv"))
     PLOT_FILE = Path(join(RUNS_DIR, "plot.png"))
+    JSONL_TRAIN = Path(join(DATA_DIR, "train.jsonl"))
+    GPT_MODEL_FILE = Path(join(RUNS_DIR, "gpt_model.json"))
 
     SEED = 42
     MAX_SEQUENCE_LENGTH = 80
     
+    OPENAI_API_KEY = "your-openai-api-key"     
+
     GENDER_M = "male"
     GENDER_F = "female"
     GENDERS = [GENDER_F, GENDER_M]
