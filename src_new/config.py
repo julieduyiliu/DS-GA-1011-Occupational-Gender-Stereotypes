@@ -26,7 +26,8 @@ class Config:
     SEED = 42
     MAX_SEQUENCE_LENGTH = 80
     
-    OPENAI_API_KEY = "your-openai-api-key"     
+    # remenber to change this to your own key
+    OPENAI_API_KEY = "your-api-key"
 
     GENDER_M = "male"
     GENDER_F = "female"

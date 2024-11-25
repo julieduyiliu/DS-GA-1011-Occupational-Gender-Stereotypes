@@ -43,79 +43,77 @@ np.savetxt(Config.RESULTS_FILE, np.array(results),
 print("\n")
 
 ###############################################################################
-# # Gender differences in SST-2 train dataset
-# train = pd.read_csv(Config.TSV_TRAIN, sep="\t", header=None, names=["idx", "class", "dummy", "text"])
-# d = train.to_dict("records")
-# m_list = []
-# for item in d:
-#     words = item["text"].split()
-#     for old_m in Config.MALE_NOUNS:
-#         m = old_m.replace("This ", "").replace("My ", "").replace("The ", "").replace(", you are ", "").lower()
-#         if m in words:
-#            m_list.append(item['class'])  # Changed from '_1' to 'class'
-#            break
-# print("Male: ", len(m_list), np.mean(m_list) if m_list else "N/A")
+# Gender differences in SST-2 train dataset
+print("gender difference in SST-2 train dataset")
+train = pd.read_csv(Config.TSV_TRAIN, sep="\t", header=None, names=["idx", "class", "dummy", "text"])
+d = train.to_dict("records")
+m_list = []
+for item in d:
+    words = item["text"].split()
+    for old_m in Config.MALE_NOUNS:
+        m = old_m.replace("This ", "").replace("My ", "").replace("The ", "").replace(", you are ", "").lower()
+        if m in words:
+           m_list.append(item['class'])  # Changed from '_1' to 'class'
+           break
+print("Male: ", len(m_list), np.mean(m_list) if m_list else "N/A")
 
-# f_list = []
-# for item in d:
-#     words = item["text"].split()
-#     for old_f in Config.FEMALE_NOUNS:
-#         f = old_f.replace("This ", "").replace("My ", "").replace("The ", "").replace(", you are ", "").lower()
-#         if f in words:
-#            f_list.append(item['class'])  # Changed from '_1' to 'class'
-#            break
-# print("Female: ", len(f_list), np.mean(f_list) if f_list else "N/A")
-# print("\n")
+f_list = []
+for item in d:
+    words = item["text"].split()
+    for old_f in Config.FEMALE_NOUNS:
+        f = old_f.replace("This ", "").replace("My ", "").replace("The ", "").replace(", you are ", "").lower()
+        if f in words:
+           f_list.append(item['class'])  # Changed from '_1' to 'class'
+           break
+print("Female: ", len(f_list), np.mean(f_list) if f_list else "N/A")
+print("\n")
 
 ###############################################################################
-# # Ad-hoc analysis for each profession
-# print("Profession mean_sentiment female-male")
-# i = 0
-# for p in Config.PROFESSIONS:
-#     male0 = preds0[20*i:20*(i+1)]
-#     male1 = preds1[20*i:20*(i+1)]
-#     male2 = preds2[20*i:20*(i+1)]
+# Ad-hoc analysis for each profession
+print("Profession mean_sentiment female-male")
+i = 0
+for p in Config.PROFESSIONS:
+    # Get predictions for each model (LogReg, BiLSTM, GPT-4)
+    # Male predictions (first 400 samples, 20 per profession)
+    male0 = preds0[20*i:20*(i+1)]
+    male1 = preds1[20*i:20*(i+1)]
+    male3 = preds3[20*i:20*(i+1)]
 
-#     female0 = preds0[400 + 20*i:400 + 20*(i+1)]
-#     female1 = preds1[400 + 20*i:400 + 20*(i+1)]
-#     female2 = preds2[400 + 20*i:400 + 20*(i+1)]
+    # Female predictions (last 400 samples, 20 per profession)
+    female0 = preds0[400 + 20*i:400 + 20*(i+1)]
+    female1 = preds1[400 + 20*i:400 + 20*(i+1)]
+    female3 = preds3[400 + 20*i:400 + 20*(i+1)]
     
-#     print(p, np.mean(female2 + male2), np.mean(female2) - np.mean(male2))
-    
-#     i = i + 1
+    # Calculate and print average sentiment and gender difference for GPT-4
+    print(p, np.mean(female3 + male3), np.mean(female3) - np.mean(male3))
+    i += 1
 
-# control_preds = []
-# control = preds2_with_control[-40:]
-# male_c = control[:20]
-# female_c = control[20:]
-# print("CONTROL", np.mean(female_c + male_c), np.mean(female_c) - np.mean(male_c))
-# print("\n")
-
+print("\n")
 ###############################################################################
 # Comparing between male/female (e.g., bachelor/spinster)
-# sentences = utils.get_sentences()
-# print("noun female-male")
-# for noun in Config.MALE_NOUNS:
-#     noun_preds = []
-#     i = 0
-#     for sentence in sentences:
-#         if noun in sentence:
-#             noun_preds.append(preds2[400 + i] - preds2[i])
-#         i = i + 1
-#     print(noun, np.mean(noun_preds) if noun_preds else "N/A")
+sentences = utils.get_sentences()
+print("noun female-male")
+for noun in Config.MALE_NOUNS:
+    noun_preds = []
+    i = 0
+    for sentence in sentences:
+        if noun in sentence:
+            noun_preds.append(preds3[400 + i] - preds3[i])
+        i = i + 1
+    print(noun, np.mean(noun_preds) if noun_preds else "N/A")
 
-# # Analyze bachelor vs. spinster
-# bachelor = []
-# spinster = []
-# i = 0
-# for sentence in sentences:
-#     if "bachelor" in sentence:
-#         bachelor.append(preds2[i])
-#         spinster.append(preds2[400 + i])
-#     i = i + 1
-# bs = bachelor + spinster
-# (t, prob, diff) = utils.ttest(bs) if bs else (0, 1, 0)  # Avoid NaN by setting defaults if bs is empty
-# print("spinster-bachelor: ", diff, prob)
+# Analyze bachelor vs. spinster
+bachelor = []
+spinster = []
+i = 0
+for sentence in sentences:
+    if "bachelor" in sentence:
+        bachelor.append(preds3[i])
+        spinster.append(preds3[400 + i])
+    i = i + 1
+bs = bachelor + spinster
+(t, prob, diff) = utils.ttest(bs) if bs else (0, 1, 0)  # Avoid NaN by setting defaults if bs is empty
+print("spinster-bachelor: ", diff, prob)
 ###############################################################################
 # # Generate plot
 # df = pd.read_csv(Config.PLOT_DATA_FILE, encoding="utf8")
