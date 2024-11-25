@@ -1,6 +1,7 @@
 # Why albert-base-v2?
 
 albert-base-v2 has approximately 12M parameters, making it closer in size to BERT-base (110M parameters) than smaller ALBERT variants like albert-small or albert-tiny. The v2 versions of ALBERT (e.g., albert-base-v2) fix known issues in v1, such as sentence order prediction inefficiencies, making it better suited for comparison.
+
 ---
 1. **Dataset Prep**  
    - `generate_corpus.py` generates a `gender.tsv` dataset for gender bias testing by combining male and female nouns with professions (e.g., "This man is a doctor.").  
